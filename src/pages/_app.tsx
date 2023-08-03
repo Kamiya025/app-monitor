@@ -1,6 +1,24 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-
+import "@/styles/globals.css"
+import { AxiosError } from "axios"
+import type { AppProps } from "next/app"
+import toast, { Toaster } from "react-hot-toast"
+import { QueryCache, QueryClient, QueryClientProvider } from "react-query"
+export const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      toast.error((error as AxiosError).message)
+    },
+  }),
+})
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Toaster
+        position="top-center"
+        containerClassName="mt-[60px] lg:mt-0 z-[9999]"
+        toastOptions={{ className: "" }}
+      ></Toaster>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  )
 }
