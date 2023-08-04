@@ -1,0 +1,54 @@
+@import '../../utils/index';
+
+.scrolling-text {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: visible;
+  position: relative;
+  p {
+    position: absolute;
+    bottom: 0;
+  }
+}
+.scrolling-text:hover p {
+  @include breakpoint-up('xl') {
+    /* Starting position */
+    // -moz-transform: translateX(50%);
+    // -webkit-transform: translateX(50%);
+    // transform: translateX(50%);
+    /* Apply animation to this element */
+    -moz-animation: scrolling-text 10s linear infinite;
+    -webkit-animation: scrolling-text 10s linear infinite;
+    animation: scrolling-text 10s linear infinite;
+  }
+}
+/* Move it (define the animation) */
+@-moz-keyframes scrolling-text {
+  0% {
+    -moz-transform: translateX(0%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes scrolling-text {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@keyframes scrolling-text {
+  0% {
+    -moz-transform: translateX(0%); /* Browser bug fix */
+    -webkit-transform: translateX(0%); /* Browser bug fix */
+    transform: translateX(0%);
+  }
+  100% {
+    -moz-transform: translateX(-100%); /* Browser bug fix */
+    -webkit-transform: translateX(-100%); /* Browser bug fix */
+    transform: translateX(-100%);
+  }
+}

@@ -1,4 +1,4 @@
-import "@/styles/globals.css"
+import "@/styles/globals.scss"
 import { AxiosError } from "axios"
 import type { AppProps } from "next/app"
 import toast, { Toaster } from "react-hot-toast"
@@ -7,6 +7,9 @@ export const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {
       toast.error((error as AxiosError).message)
+    },
+    onSuccess: () => {
+      toast.success("Đã lấy dữ liệu mới")
     },
   }),
 })
